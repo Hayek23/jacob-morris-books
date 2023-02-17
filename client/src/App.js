@@ -3,8 +3,9 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink
-} from '@apollo/client'
+  createHttpLink,
+} from '@apollo/client';
+import {setContext} from '@apollo/client/link/context'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
@@ -15,7 +16,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getIten('id_token');
+  const token = localStorage.getItem('id_token');
   return {
     headers: {
       ...headers,
