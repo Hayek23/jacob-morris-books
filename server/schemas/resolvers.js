@@ -32,11 +32,11 @@ const resolvers = {
 
             const token = signToken(user);
         },
-        saveBook: async (parent, { input }, context) => {
+        saveBook: async (parent, { bookInput }, context) => {
             if(context.user) {
                 const updatedUser = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $$addToSet: { savedBooks: input }},
+                    { $$addToSet: { savedBooks: bookInput }},
                     { new: true }
                   );
                   return updatedUser
@@ -56,3 +56,5 @@ const resolvers = {
         }
     }
 };
+
+module.exports = resolvers;
